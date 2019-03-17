@@ -98,6 +98,10 @@ var hasBlockedContent = false;
 
                 } else if (isErrorResponse(response)) {
 
+                    if (response.message) {
+                        response.message = piwikHelper.escape(piwikHelper.htmlDecode(response.message));
+                    }
+
                     createResponseErrorNotification(response, options);
 
                     return $q.reject(response.message || null);
